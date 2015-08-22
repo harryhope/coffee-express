@@ -22,7 +22,8 @@ module.exports = (grunt) ->
       options:
         script: 'index.js'
       dev:
-        options: {}
+        options:
+          node_env: 'development'
 
     mochaTest:
       all:

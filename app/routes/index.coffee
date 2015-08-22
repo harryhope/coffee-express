@@ -1,6 +1,5 @@
-# #routes/index.coffee
+# routes/index.coffee
 # Define application routes.
-
 express = require 'express'
 router = express.Router()
 

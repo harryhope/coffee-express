@@ -4,7 +4,7 @@
   "description": "Boilerplate for an express app in coffeescript",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "NODE_ENV=production node index.js",
     "test": "npm test"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "body-parser": "^1.13.3",
     "coffee-script": "^1.9.3",
     "cookie-parser": "^1.3.5",
+    "cson": "^3.0.1",
     "express": "^4.13.3"
   },
   "devDependencies": {

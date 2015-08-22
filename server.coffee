@@ -4,7 +4,7 @@ express = require 'express'
 cookies = require 'cookie-parser'
 parser = require 'body-parser'
 routes = require './app/routes'
-#config = require './config'
+config = require './app/config'
 
 port = process.env.PORT or 3000
 app = express()
