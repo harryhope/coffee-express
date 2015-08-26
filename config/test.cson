@@ -1,0 +1,6 @@
+# production.cson
+# App configuration settings for production mode.
+# These settings will be used whenever NODE_ENV is set to 'production'
+# This usually happens when the application is run using `npm start`.
+
+options: []
