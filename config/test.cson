@@ -1,4 +1,4 @@
-# production.cson
+# test.cson
 # App configuration settings for production mode.
 # These settings will be used whenever NODE_ENV is set to 'test'
 # This usually happens when running tests via `grunt test`.
