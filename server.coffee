@@ -4,8 +4,8 @@ express = require 'express'
 cookies = require 'cookie-parser'
 logger = require 'morgan'
 parser = require 'body-parser'
-routes = require './app/routes'
-config = require './app/config'
+routes = require './app/routes/main'
+config = require './app/config/config'
 
 port = process.env.PORT or 3000
 app = express()
