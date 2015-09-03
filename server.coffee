@@ -15,6 +15,7 @@ app.use logger 'combined' if app.get('env') is 'development'
 app
   .use cookies()
   .use parser.json()
+  .use parser.urlencoded {extended: yes}
   .use routes
 
 app.listen port, ->
