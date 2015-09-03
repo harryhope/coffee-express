@@ -1,4 +1,4 @@
-# coffee-express
+# coffee-express [![Build Status](https://travis-ci.org/harryhope/coffee-express.svg)](https://travis-ci.org/harryhope/coffee-express)
 Boilerplate for an express app in coffeescript.
 
 ### Development
