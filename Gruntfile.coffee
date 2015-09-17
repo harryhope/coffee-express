@@ -5,7 +5,8 @@ module.exports = (grunt) ->
     'server.coffee',
     'Gruntfile.coffee',
     'app/**/*.coffee',
-    'config/**/*.coffee'
+    'config/**/*.coffee',
+    'test/**/*.coffee'
   ]
 
   # Grunt Config
@@ -63,4 +64,4 @@ module.exports = (grunt) ->
   # Tasks
   grunt.registerTask('build', ['coffeelint'])
   grunt.registerTask('dev', ['build', 'express:dev', 'watch'])
-  grunt.registerTask('test', 'mochaTest')
+  grunt.registerTask('test', ['build', 'mochaTest'])
