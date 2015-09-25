@@ -13,6 +13,10 @@ app = express()
 app.use logger 'combined' if app.get('env') is 'development'
 
 app
+  .set('view engine', 'jade')
+  .set('views', './app/views')
+
+app
   .use cookies()
   .use parser.json()
   .use parser.urlencoded {extended: yes}
