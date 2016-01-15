@@ -2,7 +2,8 @@
 # Bootstrap the application.
 express = require 'express'
 cookies = require 'cookie-parser'
-logger = require 'morgan'
+morgan = require 'morgan'
+winston = require 'winston'
 parser = require 'body-parser'
 routes = require './app/routes/main'
 config = require './app/config/config'
@@ -10,7 +11,7 @@ config = require './app/config/config'
 port = process.env.PORT or 3000
 app = express()
 
-app.use logger 'combined' if app.get('env') is 'development'
+app.use morgan 'combined' if app.get('env') is 'development'
 
 app
   .set('view engine', 'jade')
@@ -23,6 +24,6 @@ app
   .use routes
 
 app.listen port, ->
-  console.log('Listening on port %s in %s mode', @address().port, app.get 'env')
+  winston.info('Listening on port %s in %s mode', @address().port, app.get 'env')
 
 module.exports = app

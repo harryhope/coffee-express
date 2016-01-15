@@ -4,6 +4,6 @@ express = require 'express'
 router = express.Router()
 
 router.get '/', (req, res) ->
-  res.json {status: 'success', data: {response: 200}}
+  res.render 'index'
 
 module.exports = router
