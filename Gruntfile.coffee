@@ -7,7 +7,7 @@ module.exports = (grunt) ->
   clientScripts = [
     'public/**/*.coffee'
   ]
-  appScripts = [
+  serverScripts = [
     'server.coffee',
     'Gruntfile.coffee',
     'app/**/*.coffee',
@@ -20,7 +20,7 @@ module.exports = (grunt) ->
   grunt.initConfig
     watch:
       server:
-        files: appScripts,
+        files: serverScripts,
         tasks: ['build', 'express:dev']
         options:
           spawn: false
@@ -83,7 +83,7 @@ module.exports = (grunt) ->
           './public/js/main.js': ['./public/js/main.js']
 
     coffeelint:
-      all: appFiles
+      all: scriptFiles
       options:
         arrow_spacing: {level: 'error'}
         ensure_comprehensions: {level: 'error'}
