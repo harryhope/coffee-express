@@ -11,13 +11,13 @@ config = require './app/config/config'
 port = process.env.PORT or 3000
 app = express()
 
-app.use morgan 'combined' if app.get('env') is 'development'
-
 app
   .set('view engine', 'jade')
   .set('views', './app/views')
 
 app
+  .use morgan 'combined'
+  .use express.static 'public'
   .use cookies()
   .use parser.json()
   .use parser.urlencoded {extended: yes}

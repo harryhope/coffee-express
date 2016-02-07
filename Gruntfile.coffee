@@ -1,23 +1,39 @@
 module.exports = (grunt) ->
 
   # Files to monitor.
-  appFiles = [
+  styleFiles = [
+    'public/**/*.sass'
+  ]
+  clientScripts = [
+    'public/**/*.coffee'
+  ]
+  appScripts = [
     'server.coffee',
     'Gruntfile.coffee',
     'app/**/*.coffee',
     'config/**/*.coffee',
     'test/**/*.coffee'
   ]
+  scriptFiles = serverScripts.concat clientScripts
 
   # Grunt Config
   grunt.initConfig
-
     watch:
       server:
-        files: appFiles,
+        files: appScripts,
         tasks: ['build', 'express:dev']
         options:
           spawn: false
+      client:
+        files: clientScripts
+        tasks: ['build-fe-js-dev']
+        options:
+          livereload: 35629
+      styles:
+        files: styleFiles
+        tasks: ['sass']
+        options:
+          livereload: 35629
 
     express:
       options:
@@ -25,6 +41,9 @@ module.exports = (grunt) ->
       dev:
         options:
           node_env: 'development'
+      test:
+        options:
+          node_env: 'test'
 
     mochaTest:
       all:
@@ -32,6 +51,36 @@ module.exports = (grunt) ->
           reporter: 'spec'
           require: 'coffee-script/register'
         src: ['test/**/*.coffee']
+
+    sass:
+      options:
+        sourceMap: true
+        style: 'compressed'
+      dist:
+        files:
+          './public/css/style.css': './public/sass/main.sass'
+
+    browserify:
+      dist:
+        files:
+          './public/js/main.js': ['./public/coffee/**/*.coffee']
+        options:
+          transform: ['coffeeify']
+          browserifyOptions:
+            debug: yes
+
+    extract_sourcemap:
+      dist:
+        files:
+          './public/js': ['./public/js/main.js']
+
+    uglify:
+      options:
+        sourceMap: yes
+        sourceMapIn: './public/js/main.js.map'
+      dist:
+        files:
+          './public/js/main.js': ['./public/js/main.js']
 
     coffeelint:
       all: appFiles
@@ -48,7 +97,7 @@ module.exports = (grunt) ->
           value: 2
           level: 'error'
         cyclomatic_complexity:
-          value: 36
+          value: 8
           level: 'error'
         max_line_length:
           value: 120,
@@ -56,12 +105,19 @@ module.exports = (grunt) ->
           limitComments: yes
 
   # Npm Tasks
-  grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-coffeelint'
+  grunt.loadNpmTasks 'grunt-extract-sourcemap'
+  grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-express-server'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-mocha-test'
+  grunt.loadNpmTasks 'grunt-browserify'
+  grunt.loadNpmTasks 'grunt-coffeelint'
+  grunt.loadNpmTasks 'grunt-sass'
 
   # Tasks
-  grunt.registerTask('build', ['coffeelint'])
-  grunt.registerTask('dev', ['build', 'express:dev', 'watch'])
-  grunt.registerTask('test', ['build', 'mochaTest'])
+  grunt.registerTask('dev', ['sass', 'build-fe-js-dev', 'express:dev', 'watch'])
+  grunt.registerTask('test', ['coffeelint', 'mochaTest'])
+
+  # Helper Tasks
+  grunt.registerTask('build-fe-prod', ['sass', 'browserify', 'extract_sourcemap', 'uglify'])
+  grunt.registerTask('build-fe-js-dev', ['coffeelint', 'browserify', 'extract_sourcemap'])
