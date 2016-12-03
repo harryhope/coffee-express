@@ -43,7 +43,7 @@ module.exports = (grunt) ->
           node_env: 'development'
       test:
         options:
-          node_env: 'test'
+          node_env: 'development'
 
     mochaTest:
       all:
