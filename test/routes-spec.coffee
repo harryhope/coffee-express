@@ -1,6 +1,5 @@
 # routes-spec.coffee
 # Test server routes.
-process.env.NODE_ENV = 'test'
 should = require 'should'
 request = require 'supertest'
 app = require '../server'

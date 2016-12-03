@@ -8,10 +8,10 @@ module.exports = (grunt) ->
     'public/**/*.coffee'
   ]
   serverScripts = [
-    'server.coffee',
-    'Gruntfile.coffee',
-    'app/**/*.coffee',
-    'config/**/*.coffee',
+    'server.coffee'
+    'Gruntfile.coffee'
+    'app/**/*.coffee'
+    'config/**/*.coffee'
     'test/**/*.coffee'
   ]
   scriptFiles = serverScripts.concat clientScripts

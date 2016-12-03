@@ -12,7 +12,7 @@ port = process.env.PORT or 3000
 app = express()
 
 app
-  .set('view engine', 'jade')
+  .set('view engine', 'pug')
   .set('views', './app/views')
 
 app
