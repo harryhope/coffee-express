@@ -6,6 +6,8 @@ module.exports = (err, req, res, next) ->
     err = new NotFound()
 
   switch err?.status
+    when 403
+      return res.render 'error-pages/403'
     when 404
       return res.render 'error-pages/404'
     else
