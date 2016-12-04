@@ -7,6 +7,7 @@ winston = require 'winston'
 parser = require 'body-parser'
 routes = require './app/routes/main'
 config = require './app/config/config'
+errors = require './app/middleware/error-handler'
 
 port = process.env.PORT or 3000
 app = express()
@@ -22,6 +23,7 @@ app
   .use parser.json()
   .use parser.urlencoded {extended: yes}
   .use routes
+  .use errors
 
 app.listen port, ->
   winston.info('Listening on port %s in %s mode', @address().port, app.get 'env')

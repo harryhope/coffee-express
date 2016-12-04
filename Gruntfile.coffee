@@ -21,7 +21,7 @@ module.exports = (grunt) ->
     watch:
       server:
         files: serverScripts,
-        tasks: ['build', 'express:dev']
+        tasks: ['express:dev']
         options:
           spawn: false
       client:
